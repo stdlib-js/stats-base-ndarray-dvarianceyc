@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,19 +16,11 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
 
-// MODULES //
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
 
-var numelDimension = require( '@stdlib/ndarray-base-numel-dimension' );
-var getStride = require( '@stdlib/ndarray-base-stride' );
-var getOffset = require( '@stdlib/ndarray-base-offset' );
-var getData = require( '@stdlib/ndarray-base-data-buffer' );
-var ndarraylike2scalar = require( '@stdlib/ndarray-base-ndarraylike2scalar' );
-var strided = require( '@stdlib/stats-strided-dvarianceyc' ).ndarray;
-
-
-// MAIN //
+import { float64ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
 * Computes the variance of a one-dimensional double-precision floating-point ndarray using a one-pass algorithm proposed by Youngs and Cramer.
@@ -40,8 +32,8 @@ var strided = require( '@stdlib/stats-strided-dvarianceyc' ).ndarray;
 *     -   a one-dimensional input ndarray.
 *     -   a zero-dimensional ndarray specifying the degrees of freedom adjustment.
 *
-* @param {ArrayLikeObject<Object>} arrays - array-like object containing ndarrays
-* @returns {number} variance
+* @param arrays - array-like object containing ndarrays
+* @returns variance
 *
 * @example
 * var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
@@ -52,23 +44,14 @@ var strided = require( '@stdlib/stats-strided-dvarianceyc' ).ndarray;
 * };
 *
 * var x = new Float64Vector( [ 1.0, -2.0, 2.0 ] );
-*
 * var correction = scalar2ndarray( 1.0, opts );
 *
 * var v = dvarianceyc( [ x, correction ] );
 * // returns ~4.3333
 */
-function dvarianceyc( arrays ) {
-	var correction;
-	var x;
-
-	x = arrays[ 0 ];
-	correction = ndarraylike2scalar( arrays[ 1 ] );
-
-	return strided( numelDimension( x, 0 ), correction, getData( x ), getStride( x, 0 ), getOffset( x ) ); // eslint-disable-line max-len
-}
+declare function dvarianceyc( arrays: [ float64ndarray, typedndarray<number> ] ): number;
 
 
 // EXPORTS //
 
-module.exports = dvarianceyc;
+export = dvarianceyc;
