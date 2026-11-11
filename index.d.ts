@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,17 +16,28 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
+
+import { float64ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
-* Compute the variance of a one-dimensional double-precision floating-point ndarray using a one-pass algorithm proposed by Youngs and Cramer.
+* Computes the variance of a one-dimensional double-precision floating-point ndarray using a one-pass algorithm proposed by Youngs and Cramer.
 *
-* @module @stdlib/stats-base-ndarray-dvarianceyc
+* ## Notes
+*
+* -   The function expects the following ndarrays:
+*
+*     -   a one-dimensional input ndarray.
+*     -   a zero-dimensional ndarray specifying the degrees of freedom adjustment.
+*
+* @param arrays - array-like object containing ndarrays
+* @returns variance
 *
 * @example
 * var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
 * var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
-* var dvarianceyc = require( '@stdlib/stats-base-ndarray-dvarianceyc' );
 *
 * var opts = {
 *     'dtype': 'float64'
@@ -38,26 +49,9 @@
 * var v = dvarianceyc( [ x, correction ] );
 * // returns ~4.3333
 */
-
-// MODULES //
-
-var join = require( 'path' ).join;
-var tryRequire = require( '@stdlib/utils-try-require' );
-var isError = require( '@stdlib/assert-is-error' );
-var main = require( './main.js' );
-
-
-// MAIN //
-
-var dvarianceyc;
-var tmp = tryRequire( join( __dirname, './native.js' ) );
-if ( isError( tmp ) ) {
-	dvarianceyc = main;
-} else {
-	dvarianceyc = tmp;
-}
+declare function dvarianceyc( arrays: [ float64ndarray, typedndarray<number> ] ): number;
 
 
 // EXPORTS //
 
-module.exports = dvarianceyc;
+export = dvarianceyc;
